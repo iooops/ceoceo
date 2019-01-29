@@ -1,0 +1,9 @@
+mixin organiser(org)
+	.organiser
+		.organiser__header
+			.img-wrapper
+				img(src=org.image, alt='CEO leaders - ' + org.name, width=80, height=80).img-circle
+			h4.organiser__name: a(href='https://www.linkedin.com/in/' + org.linkedin, target='_blank') #{org.name}
+			p.organiser__twitter=org.field
+			//- p.organiser__twitter: a(href='https://twitter.com/' + org.twitter, target='_blank') @#{org.twitter}
+		p.mv-0=org.title

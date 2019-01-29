@@ -1,0 +1,83 @@
+extends ../../layouts/default
+
+
+//- INCLUDES
+include ../../mixins/post
+include ../../mixins/meetup-talk
+include ../../mixins/advertisement
+
+//- INTRO
+block intro 
+
+	//- HERO
+	if !meetup
+		h2.text-center You've just deployed a new site! Go add some data :)
+	else
+		article#hero
+
+			//- Intro
+			section.hero-intro.hero-intro--hasmask
+				.hero-background
+					//- img(src='/images/placeholders/stanford-2.jpg')
+				.hero-intro-content
+					h1.title THIS IS CEO
+					h1.subtitle We empower and connect entrepreneurs in China and Silicon Valley.
+					a(href='/about')
+						button.hero-button 	WHO WE ARE
+					if user
+						a(href='/me', data-from=page.path).js-auth-trigger
+							button.hero-button MY ACCOUNT
+					else 
+						a(href='/join', data-from=page.path).js-auth-trigger
+							button.hero-button JOIN US
+			//- About
+			section.hero-details: .container
+				.row: .col-sm-10.col-sm-offset-1: .row
+					h2.text-center Our Programs
+				.row
+					.col-sm-4
+						img.programs-img.img-rounded.img-responsive(src='/images/placeholders/program-1.jpg')
+						h3.programs-title CEO speaker series
+						p.programs-details Besides inviting successful founders to bring us their vision of the future and their insight on different industries, we also have special guest come talk about anything new entrepreneurs interested in: from intellectual property law to startup environment.
+					.col-sm-4
+						img.programs-img.img-rounded.img-responsive(src='/images/placeholders/program-2.jpg')
+						h3.programs-title CEO Innovation Mixer
+						p.programs-details During the mixers, we will invite our fellow Stanford researchers, Stanford GSB colleagues,and experienced engineers with different professional specialties in the Silicon Valley to discuss cutting-edge technologies and start-up ideas.
+					.col-sm-4
+						img.programs-img.img-rounded.img-responsive(src='/images/placeholders/program-3.jpg')
+						h3.programs-title Startup Trek
+						p.programs-details During the summer trek, participants visit outstanding startup companies in China. CEO Startup Trek aims to help Chinese entrepreneurs or talented Engineers in Silicon Valley communicate in person with successful Chinese entrepreneurs and learn from their experience.
+
+			//-Talks
+			section.hero-meetup.hero-intro--hasmask
+				.hero-background
+					//- img(src='/images/placeholders/sydney-1.jpg')
+				.hero-intro-content
+					h1.title #{meetup.state == 'active' ? 'COMING NEXT' : 'LAST MEETUP'} 
+					h1.subtitle= meetup.name
+					p.byline: strong #{meetup._.startDate.format('ddd, DD MMM YYYY')} &#8212; #{meetup._.startDate.format('h:mma')} - #{meetup._.endDate.format('h:mma')}
+					p.byline #{meetup.place} &#8212;
+						a(href='http://maps.google.com.au/?daddr=' + (meetup.map || meetup.place), target='_blank') Directions
+					a(href='/meetups')
+						button.hero-button DETAILS
+				if meetup.state === 'active'
+					//- #react-hero-button
+							
+
+//- JS
+block js
+
+	if meetup
+		script.
+			CEO.currentMeetupId = !{JSON.stringify(meetup.id)};
+	if user
+		script.
+			CEO.user = !{JSON.stringify(user)};
+
+	//- REACT SCRIPTS
+	script(src='/js/packages.js')
+	script(src='/js/home.js')
+	script.
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+	if google_api_key
+		script(src!='https://maps.googleapis.com/maps/api/js?key=' + google_api_key + '&libraries=places')

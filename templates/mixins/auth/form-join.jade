@@ -1,0 +1,73 @@
+//-
+	Join
+	------------------------------
+	
+	Args
+	* modal  - boolean
+	* initial [default "join"] - accepts "signin" | "join" | "password"
+	
+mixin form-join(args)
+	.auth-box.modal-pane-join(class=args.modal && args.initial != 'join' ? 'hidden' : null)
+		if args.modal
+			.modal-header
+				button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
+				h4.modal-title Join CEO
+		div(class=args.modal ? 'modal-body' : null)
+			include ../../includes/social-signin
+			p.auth-form-divider: span.auth-form-divider-text or
+			//- p Or use your email, that's okay too:
+			form(method='post', action='/join', autocomplete='off', novalidate).auth-form
+				input(type='hidden', name='action', value='join')
+				input(type='hidden', name='target', value=!args.modal ? form.target : page.path)
+				if !args.modal
+					if form.error
+						.flash-messages
+							.alert.alert-danger
+								div!= form.error.message || form.error
+								
+								//- Field Errors
+								if form.error.errors && !_.isEmpty(form.error.errors)
+									ul
+										each error, key in form.error.errors
+											li!= error.msg
+					
+					- var checkFormError = function(key) { return form.error && form.error.errors && form.error.errors[key] ? 'has-error' : null }
+				.form-groups
+					.form-group(class=!args.modal ? checkFormError('firstname') : null)
+						label(for='firstname').sr-only First name
+						input(type='text', name='firstname', placeholder='First name (in English or Pinyin)', value=!args.modal ? form.firstname : null).form-control.form-control--first
+					.form-group(class=!args.modal ? checkFormError('lastname') : null)
+						label(for='lastname').sr-only Last name
+						input(type='text', name='lastname', placeholder='Last name (in English or Pinyin)', value=!args.modal ? form.lastname : null).form-control
+					.form-group(class=!args.modal ? checkFormError('chinesename') : null)
+						label(for='chinesename').sr-only Chinese name
+						input(type='text', name='chinesename', placeholder='中文名 (Chinese name, if applicable)', value=!args.modal ? form.chinesename : null).form-control
+					.form-group(class=!args.modal ? checkFormError('wechatid') : null)
+						label(for='wechatid').sr-only Wechat Id
+						input(type='text', name='wechatid', placeholder='Wechat ID (if applicable)', value=!args.modal ? form.wechatid : null).form-control
+					.form-group(class=!args.modal ? checkFormError('email') : null)
+						label(for='email').sr-only Email
+						input(type='email', name='email', placeholder='Permanent Email Address', value=!args.modal ? form.email : null).form-control
+					.form-group(class=!args.modal ? checkFormError('password') : null)
+						label(for='password').sr-only Password
+						input(type='password', name='password', placeholder='Password', value=!args.modal ? form.password : null).form-control
+					.form-group(class=!args.modal ? checkFormError('eduemail') : null)
+						label(for='eduemail').sr-only Edu Email
+						input(type='eduemail', name='eduemail', placeholder='.edu Email Address (if applicable)', value=!args.modal ? form.eduemail : null).form-control
+					.form-group(class=!args.modal ? checkFormError('yeargraduation') : null)
+						label(for='yeargraduation').sr-only Year Graduation
+						input(type='yeargraduation', name='yeargraduation', placeholder='What is your (expected) year of graduation? (e.g. 2019 if applicable)', value=!args.modal ? form.yeargraduation : null).form-control
+					.form-group(class=!args.modal ? checkFormError('linkedinprofile') : null)
+						label(for='linkedinprofile').sr-only LinkedIn Profile
+						input(type='linkedinprofile', name='linkedinprofile', placeholder='Please provide your LinkedIn profile link (if applicable)', value=!args.modal ? form.linkedinprofile : null).form-control
+					.form-group(class=!args.modal ? checkFormError('company') : null)
+						label(for='company').sr-only Company
+						input(type='company', name='company', placeholder='What company are you working for? (if applicable)', value=!args.modal ? form.company : null).form-control
+					.form-group(class=!args.modal ? checkFormError('website') : null)
+						label(for='website').sr-only Website (optional)
+						input(type='website', name='website', placeholder='Website (optional)', value=!args.modal ? form.website : null).form-control.form-control--last
+				button(type='submit').btn.btn-block.btn-primary.btn-submit Join
+		
+			p.text-center.text-muted.mt-3
+				| Already have an account? 
+				a(href=args.modal ? js : '/signin', rel=args.modal ? 'modal-pane' : null, data-modal-pane=args.modal ? 'signin' : null) Sign in

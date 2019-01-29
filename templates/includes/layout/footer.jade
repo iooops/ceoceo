@@ -1,0 +1,37 @@
+//- SITE FOOTER
+footer.site-footer.site-footer--sticky: .container
+	.row
+		.col-sm-4
+			h5.footer-heading About
+			p CEO organizes in-depth small-group entrepreneurial talks, brainstorm sessions, etc.
+			p Chinese Entrepreneurs Organization is not endorsed by, involved with or otherwise affiliated with Stanford University. Chinese Entrepreneurs Organization is an independent, non-profit organization that is unrelated to the activities or mission of Stanford University
+			ul.list-inline
+				li: a(href='/about') More about CEO
+				li: a(href='mailto:yonglisc@gmail.com') Contact us
+
+		.col-sm-8
+			.row
+				.col-xs-4
+					h5.footer-heading Members
+					ul
+						li: a(href='/members') Members
+						li: a(href='/mentoring') Mentoring
+						li: a(href='/members/mentors') Mentors
+						if !user
+							li: a(href='/join').js-auth-trigger Become a Member
+				.col-xs-4
+					h5.footer-heading Resources
+					ul
+						li: a(href='/organisations') Organizations
+						//- li: a(href='/links') Links
+						li: a(href='/blog') Blog
+						//- li: a(href='/showbag') Showbag
+				.col-xs-4
+					h5.footer-heading Social Media
+					//- ul: each sponsor in sponsors
+					//- 	li: a(href='/organisations#' + sponsor.id)= sponsor.name
+					ul
+						li: a(href='https://www.linkedin.com/groups/7058836') LinkedIn
+						li: a(href='https://www.facebook.com/CEO.Stanford/') Facebook
+	.row.footer-copyright
+		p Copyright &copy; CEO.

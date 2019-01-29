@@ -1,0 +1,66 @@
+extends ../../layouts/default
+
+include ../../mixins/organiser
+
+block intro
+	.page-intro: .container
+		h1.page-title 华人创业者协会
+		h1.page-title Chinese Entrepreneur Organization
+		p.lead CEO organizes in-depth small-group entrepreneurial talks, brainstorm sessions, etc.
+
+block content
+	.page-content
+		.section.highlight: .container
+			//- h2 Organisers
+			//- p.lead Each month the CEO team works to bring you great presenters in a great venue.
+			.row.about-organisers
+				.col-sm-3
+				each org in organisers
+					.col-sm-3
+						+organiser(org)
+			br
+			br
+			.row.about-organisers
+				.col-sm-2
+				each org in vporganisers1
+					.col-sm-3
+						+organiser(org)
+			br
+			br
+			.row.about-organisers
+				.col-sm-3
+				each org in vporganisers2
+					.col-sm-3
+						+organiser(org)
+
+		//- CODE
+		.section: .container-sm
+			h2 ABOUT CEO
+			h5 To build the best educational and communicational platform of entrepreneurship for all Chinese entrepreneurs and investors around the globe.
+			p CEO (Chinese Entrepreneur Organization, www.ceoceo.org) 华人者创业协会由斯坦福大学学生和校友于2008年在美国硅谷创办，旨在沟通工程师及商务人士，连接正在和准备创业的华人。CEO成员先后创立了聚美优品 (陈欧)、出门问问 (朱祎舟)、Hover Cam (王孟秋）、Alohar Mobile (王辰宇)、小红书 (毛文超)、丹华资本（谷安佳）等优秀企业或创投基金；也有部分成员加入金沙江创投、 IDG、 FreeS、真格基金等知名投资机构；或者进入Google, Twitter, Coursera等硅谷大型科技企业或新兴科技公司。自成立以来，CEO多次举办创业投资讲座，线下创业者聚会等活动，讨论科技趋势和创业想法。也曾邀请雷军、周鸿祎等百余名成功华人创业家与大家面对面分享经验。今年，CEO更是联合硅谷知名投资机构，举办专业技术的闭门讨论，针对最尖端科技的商业化进行头脑风暴。为促进国内外华人创业者之间的交流，CEO Startup Trek每年夏天带领斯坦福校友以及硅谷杰出人才与创业者回国，就新兴技术和商业动向与国内创业者进行交流学习。如今，CEO已有超过4000名会员，其中不仅凝聚了斯坦福大学的学生和校友，还吸引了硅谷及全球的华人创业者的加入。
+			p CEO - Chinese Entrepreneur Organization (www.ceoceo.org) was founded in 2008 by a group of business-minded students and talented Engineering students at Stanford. The organization serves as a platform to connect Chinese entrepreneurs and people who are interested in entrepreneurship in Silicon Valley. Since our inception, we have been hosting in-depth talks by top investors and outstanding entrepreneurs, facilitating exchange of brilliant ideas among the rich talent pool in our membership base. Many of our members have successfully formed new ventures including 聚美优品 (Ou Chen), 出门问问 (Yizhou Zhu), Hover Cam (Mengqiu Wang), Alohar Mobile (Larry Wang), Xiaohongshu (Charlwin Mao), Danhua Capital(Andrew Gu), or joined top tech companies and VCs, such as. GSR VC, IDG, FreeS, and Google. CEO has also organized summer trip - CEO Startup Trek, to visit outstanding startup companies in China. CEO Startup Trek aims to help Chinese entrepreneurs or talented Engineers in Silicon Valley communicate in person with successful Chinese entrepreneurs and learn from their experience. CEO is dedicated to creating a supportive community for Chinese entrepreneurs, and building the best educational and communicational platform of entrepreneurship for Chinese entrepreneurs and investors around the globe. Currently, CEO has more than 4000 subscribers, including current Stanford students, alumni and young professionals in the Valley.
+			hr.mv-3
+			h5 Join us
+			p If you are passionate about promoting entrepreneurship and creating a supportive community for Chinese entrepreneurs in the valley and around the world.
+
+		hr.mv-3
+		.section: .container-sm
+			h2 Our Sponsors
+			.row
+				.col-sm-3
+					.img-wrapper
+						img(src='/images/zhenfund.png', alt='Zhenfund', width="90%")
+				.col-sm-3
+					.img-wrapper
+						img(src='/images/danhua.png', alt='Danhua', width="90%")
+				.col-sm-3
+					.img-wrapper
+						img(src='/images/ggvc.png', alt='GGVC',width="90%")
+				.col-sm-3
+					.img-wrapper
+						img(src='/images/fenwick.png', alt='Fenwick',width="90%")
+
+block js
+	// twitter
+	script.
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
