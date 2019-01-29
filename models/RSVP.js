@@ -13,6 +13,8 @@ RSVP.add({
 	who: { type: Types.Relationship, ref: 'User', required: true, initial: true, index: true },
 	email: { type: Types.Email, ref: 'User', required: true, initial: true, index: true },
 	attending: { type: Types.Boolean, index: true },
+	reviewed: { type: Types.Boolean, index: true, default: false},
+	accepted: { type: Types.Boolean, index: true, default: false},
 	createdAt: { type: Date, noedit: true, collapse: true, default: Date.now },
 	changedAt: { type: Date, noedit: true, collapse: true }
 });
@@ -48,6 +50,6 @@ RSVP.schema.post('remove', function() {
  * ============
  */
 
-RSVP.defaultColumns = 'meetup, who, email, attending, createdAt';
+RSVP.defaultColumns = 'meetup, who, email, attending, reviewed, accepted, createdAt';
 RSVP.defaultSort = '-createdAt';
 RSVP.register();
